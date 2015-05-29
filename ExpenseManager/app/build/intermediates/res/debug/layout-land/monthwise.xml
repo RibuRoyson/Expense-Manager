@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="1.15"
+    android:background="@drawable/a4" >
+
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.15"
+        android:id="@+id/monbut"
+        android:text="Select Month"/>
+
+    <LinearLayout
+        android:id="@+id/columnheader"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:layout_weight="0.1"
+        android:weightSum="3.0">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Id"
+            android:layout_weight="0.3"
+            android:textColor="#000000"
+            android:gravity="center"
+            android:textStyle="bold"
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Expense"
+            android:layout_weight="0.5"
+            android:textColor="#000000"
+            android:gravity="center"
+            android:textStyle="bold"
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Category"
+            android:layout_weight="0.6"
+            android:textColor="#000000"
+            android:gravity="center"
+            android:textStyle="bold"
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Description"
+            android:layout_weight="0.7"
+            android:textColor="#000000"
+            android:gravity="center"
+            android:textStyle="bold"
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Time"
+            android:layout_weight="0.4"
+            android:textColor="#000000"
+            android:gravity="center"
+            android:textStyle="bold"
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Date"
+            android:layout_weight="0.5"
+            android:textColor="#000000"
+            android:gravity="center"
+            android:textStyle="bold"
+            />
+
+
+
+    </LinearLayout>
+    <ListView
+        android:id="@+id/list1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.90" >
+    </ListView>
+
+</LinearLayout><!-- From: file:/home/imrokraft/AndroidStudioProjects/ExpenseManager/app/src/main/res/layout-land/monthwise.xml -->

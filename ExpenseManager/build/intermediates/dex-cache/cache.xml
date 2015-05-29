@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/home/imrokraft/AndroidStudioProjects/ExpenseManager/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.1.1/jars/libs/internal_impl-22.1.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="9e070ad32b2700b0343e8e0cccc437733d91ba3a">
+        <dex dex="/home/imrokraft/AndroidStudioProjects/ExpenseManager/app/build/intermediates/pre-dexed/debug/internal_impl-22.1.1-2ce7245b15cc7ffa2719bcb07377ea8452a61eba.jar" />
+    </item>
+    <item
+        jar="/home/imrokraft/AndroidStudioProjects/ExpenseManager/app/build/intermediates/exploded-aar/com.echo/HoloGraphLibrary/1.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="11e2ec9f6e6393067119d883f1fe79e659e8146a">
+        <dex dex="/home/imrokraft/AndroidStudioProjects/ExpenseManager/app/build/intermediates/pre-dexed/debug/classes-791e4850393d4f0114873745e7ad35b7eeab6364.jar" />
+    </item>
+    <item
+        jar="/home/imrokraft/AndroidStudioProjects/ExpenseManager/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
+        <dex dex="/home/imrokraft/AndroidStudioProjects/ExpenseManager/app/build/intermediates/pre-dexed/debug/classes-77541d0a9e255ca554e96ae22896e01f8314f9a9.jar" />
+    </item>
+    <item
+        jar="/home/imrokraft/android-sdk/extras/android/m2repository/com/android/support/support-annotations/22.1.1/support-annotations-22.1.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="01d051a6bfb1218b1db2d3a5af0480ac2c25c42a">
+        <dex dex="/home/imrokraft/AndroidStudioProjects/ExpenseManager/app/build/intermediates/pre-dexed/debug/support-annotations-22.1.1-2973b2ab8c70fd43381b9623a27f76f3437c7e67.jar" />
+    </item>
+    <item
+        jar="/home/imrokraft/AndroidStudioProjects/ExpenseManager/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.1.1/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="c95ba8152923e4872e86a82cfcba9a51c0214328">
+        <dex dex="/home/imrokraft/AndroidStudioProjects/ExpenseManager/app/build/intermediates/pre-dexed/debug/classes-15767e46ae45de59185c0e1a6667e7defcb5379c.jar" />
+    </item>
+
+</items>
