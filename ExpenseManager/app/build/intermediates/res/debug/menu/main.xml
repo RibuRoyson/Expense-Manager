@@ -1,12 +1,19 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
         android:title="Settings"
              	/>
+    <item
+        android:id="@+id/action_logout"
+        android:title="@string/logout_label">
+    </item>
+    <item android:id="@+id/cloud" android:title="Cloud"
+        android:orderInCategory="100" app:showAsAction="never" />
         
 
 
 </menu>
-<!-- From: file:/home/imrokraft/AndroidStudioProjects/ExpenseManager/app/src/main/res/menu/main.xml -->
+<!-- From: file:/home/imrokraft/Android%20Trainees/Ribu/AndroidStudioProjects/ExpenseManager/app/src/main/res/menu/main.xml -->

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- From: file:/home/imrokraft/AndroidStudioProjects/ExpenseManager/HoloGraphLibrary/build/intermediates/bundles/debug/res/values/values.xml -->
+    <!-- From: file:/home/imrokraft/Android%20Trainees/Ribu/AndroidStudioProjects/ExpenseManager/HoloGraphLibrary/build/intermediates/bundles/debug/res/values/values.xml -->
     <eat-comment/>
     <string name="app_name">HoloGraphLibrary</string>
     <style name="AppBaseTheme" parent="android:Theme.Light">

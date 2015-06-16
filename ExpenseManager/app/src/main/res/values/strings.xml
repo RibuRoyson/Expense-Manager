@@ -6,4 +6,19 @@
     <string name="hello_world">Hello world!</string>
     <string name="select">Select</string>
 
+    <string name="facebook_app_id">494541540710837</string>
+    <string name="username_hint">Username</string>
+    <string name="password_hint">Password</string>
+    <string name="email_hint">Email</string>
+    <string name="sign_up_button_label">Sign Up</string>
+    <string name="signup_error_message">Please make sure you enter a username, password, and email address!</string>
+    <string name="signup_error_title">Error!</string>
+    <string name="login_error_message">Please make sure you enter a username and password!</string>
+    <string name="login_error_title">Error!</string>
+    <string name="login_button_label">Login</string>
+    <string name="sign_up_text">Sign Up!</string>
+    <string name="logout_label">Logout</string>
+    <string name="insert">Insert</string>
+    <string name="delete">Delete</string>
+
 </resources>

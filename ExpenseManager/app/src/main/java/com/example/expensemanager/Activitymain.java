@@ -1,6 +1,7 @@
 package com.example.expensemanager;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -9,13 +10,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.facebook.FacebookSdk;
+import com.parse.ParseUser;
+
 public class Activitymain extends ActionBarActivity {
 
-
+    SharedPreferences share;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activitymain);
         android.support.v7.app.ActionBar ab = getSupportActionBar();
         ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#0F62A6"));
@@ -59,13 +64,41 @@ public class Activitymain extends ActionBarActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main,menu);
+        getMenuInflater().inflate(R.menu.main, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId())
+        {
+            case R.id.cloud:
+                Intent inc1=new Intent(getApplication(),CloudListView.class);
+                startActivity(inc1);
+                break;
+            case R.id.action_logout:
+                share=getSharedPreferences("UsernamePrefs", MODE_PRIVATE);
+                int s=share.getInt("loginvalue", 0);
+                if (s==0)
+                {
+                    ParseUser.logOut();
+                    ParseUser newUser = ParseUser.getCurrentUser();
+                    loadloginView();
+                }
+                else if (s==1){
+                    Intent a=new Intent(getApplicationContext(),FaceBookLogin.class);
+                    startActivity(a);
+                }
+                break;
+        }
         return super.onOptionsItemSelected(item);
+    }
+    public void loadloginView()
+    {
+        Intent intent=new Intent(this,ActivityLogin.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
 }
 

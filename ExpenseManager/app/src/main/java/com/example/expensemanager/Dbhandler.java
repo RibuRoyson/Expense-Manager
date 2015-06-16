@@ -54,15 +54,265 @@ public class Dbhandler extends SQLiteOpenHelper {
         cv.put("year", d.getYr());
         return db.insert(TB_name, null, cv);
     }
-
-    public ArrayList<details> resultdata() {
-        ArrayList<details> results = new ArrayList<details>();
+    public int resultid() {
         SQLiteDatabase db = this.getReadableDatabase();
+        String id = null;
+        try {
+            Cursor c = null;
+            c = db.rawQuery("select * from " + TB_name, null);
+            if (c != null) {
+                String exp = null;
+                id = null;
+                if (c.moveToFirst()) {
+                    do {
+                        int cc = c.getCount();
+                         id = c.getString(c.getColumnIndex("id"));
+                         } while (c.moveToNext());
+                }
+
+                System.out.println(id);
+
+                c.close();
+                db.close();
+            } else {
+                Toast.makeText(context, "Results Empty", Toast.LENGTH_LONG).show();
+            }
+        } catch (SQLiteException se) {
+            Log.e(getClass().getSimpleName(), "could not connect");
+        }
+        return Integer.parseInt(id);
+    }
+    public ArrayList<String> resultiddb() {
+        int id=0;
+        SQLiteDatabase db = this.getReadableDatabase();
+        ArrayList<String> iddb = new ArrayList<String>();
+
         try {
             Cursor c = null;
             c = db.rawQuery("select * from " + TB_name, null);
             if (c != null) {
                 if (c.moveToFirst()) {
+                    do {
+                        int cc = c.getColumnCount();
+                        if (cc<0)
+                        {
+                            return null;
+                        }
+                        else {
+                            id = c.getInt(c.getColumnIndex("id"));
+                            iddb.add(String.valueOf(id));
+                        }
+
+                    } while (c.moveToNext());
+                }
+                System.out.println(iddb);
+                c.close();
+                db.close();
+                System.out.println(id);
+            } else {
+                Toast.makeText(context, "Results Empty", Toast.LENGTH_SHORT).show();
+
+            }
+        } catch (SQLiteException se) {
+            Log.e(getClass().getSimpleName(), "Could not connect");
+
+        }
+        return iddb;
+    }
+    public int resultid1() {
+        int id=0;
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        try {
+            Cursor c = null;
+            c = db.rawQuery("select * from " + TB_name, null);
+            if (c != null) {
+                String exp = null;
+
+                if (c.moveToLast()) {
+                    do {
+                        int cc = c.getCount();
+                        id = c.getInt(c.getColumnIndex("id"));
+
+
+
+                    } while (c.moveToNext());
+
+                }
+
+                System.out.println(id+"First");
+
+                c.close();
+                db.close();
+            } else {
+                Toast.makeText(context, "Results Empty", Toast.LENGTH_LONG).show();
+            }
+        } catch (SQLiteException se) {
+            Log.e(getClass().getSimpleName(), "could not connect");
+        }
+        return id;
+    }
+    public String resultexp() {
+       SQLiteDatabase db = this.getReadableDatabase();
+        String exp = null;
+        try {
+            Cursor c = null;
+            c = db.rawQuery("select * from " + TB_name, null);
+            if (c != null) {
+                exp = null;
+                String id = null;
+                if (c.moveToFirst()) {
+                    do {
+                        int cc = c.getCount();
+                        exp = c.getString(c.getColumnIndex("expense"));
+                       } while (c.moveToNext());
+                }
+
+               System.out.println(exp);
+
+                c.close();
+                db.close();
+            } else {
+                Toast.makeText(context, "Results Empty", Toast.LENGTH_LONG).show();
+            }
+        } catch (SQLiteException se) {
+            Log.e(getClass().getSimpleName(), "could not connect");
+        }
+        return exp;
+    }
+    public String resultcat() {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        String cat = null;
+        try {
+            Cursor c = null;
+            c = db.rawQuery("select * from " + TB_name, null);
+            if (c != null) {
+                String exp = null;
+                String id = null;
+                cat = null;
+                if (c.moveToFirst()) {
+                    do {
+                      cat = c.getString(c.getColumnIndex("cat"));
+                       } while (c.moveToNext());
+                }
+
+               System.out.println(cat);
+
+                c.close();
+                db.close();
+            } else {
+                Toast.makeText(context, "Results Empty", Toast.LENGTH_LONG).show();
+            }
+        } catch (SQLiteException se) {
+            Log.e(getClass().getSimpleName(), "could not connect");
+        }
+        return cat;
+    }
+
+    public String resultdesc() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String des = null;
+        try {
+            Cursor c = null;
+            c = db.rawQuery("select * from " + TB_name, null);
+            if (c != null) {
+                String exp = null;
+                String id = null;
+                des = null;
+                if (c.moveToFirst()) {
+                    do {
+                        int cc = c.getCount();
+                        des = c.getString(c.getColumnIndex("description"));
+                        } while (c.moveToNext());
+                }
+
+                System.out.println(des);
+
+                c.close();
+                db.close();
+            } else {
+                Toast.makeText(context, "Results Empty", Toast.LENGTH_LONG).show();
+            }
+        } catch (SQLiteException se) {
+            Log.e(getClass().getSimpleName(), "could not connect");
+        }
+        return des;
+    }
+    public String resulttime() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String tim = null;
+        try {
+            Cursor c = null;
+            c = db.rawQuery("select * from " + TB_name, null);
+            if (c != null) {
+                String exp = null;
+                String id = null;
+                tim = null;
+                if (c.moveToFirst()) {
+                    do {
+                        int cc = c.getCount();
+                        tim = c.getString(c.getColumnIndex("time"));
+
+                    } while (c.moveToNext());
+                }
+
+                System.out.println(tim);
+
+                c.close();
+                db.close();
+            } else {
+                Toast.makeText(context, "Results Empty", Toast.LENGTH_LONG).show();
+            }
+        } catch (SQLiteException se) {
+            Log.e(getClass().getSimpleName(), "could not connect");
+        }
+        return tim;
+    }
+    public String resultdate() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String dat = null;
+        try {
+            Cursor c = null;
+            c = db.rawQuery("select * from " + TB_name, null);
+            if (c != null) {
+                String exp = null;
+                String id = null;
+                dat = null;
+                if (c.moveToFirst()) {
+                    do {
+                        int cc = c.getCount();
+
+                        dat = c.getString(c.getColumnIndex("date"));
+
+
+                    } while (c.moveToNext());
+                }
+
+                System.out.println(dat);
+
+                c.close();
+                db.close();
+            } else {
+                Toast.makeText(context, "Results Empty", Toast.LENGTH_LONG).show();
+            }
+        } catch (SQLiteException se) {
+            Log.e(getClass().getSimpleName(), "could not connect");
+        }
+        return dat;
+    }
+
+
+
+    public ArrayList<details> resultdata() {
+        ArrayList<details> results = new ArrayList<details>();
+        ArrayList<String> ss = new ArrayList<String>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        try {
+            Cursor c = null;
+            c = db.rawQuery("select * from " + TB_name, null);
+            if (c != null) {
+               if (c.moveToFirst()) {
                     do {
                         int cc = c.getCount();
                         String exp = c.getString(c.getColumnIndex("expense"));
@@ -75,6 +325,7 @@ public class Dbhandler extends SQLiteOpenHelper {
                         int m = c.getInt(c.getColumnIndex("month"));
                         int y = c.getInt(c.getColumnIndex("year"));
                         results.add(new details(id, exp, cat, des, tim, dat, d, m, y));
+
                     } while (c.moveToNext());
                 }
                 c.close();

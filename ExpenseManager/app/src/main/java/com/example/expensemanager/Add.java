@@ -2,9 +2,14 @@ package com.example.expensemanager;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
@@ -20,16 +25,25 @@ import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.parse.GetCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+import com.parse.ParseUser;
+import com.parse.SaveCallback;
+
 import java.util.Calendar;
 
 public class Add extends ActionBarActivity implements android.view.View.OnClickListener {
     Spinner sp;
     Button tim, dat, save, show;
     EditText time, date, expen, descpt;
-    String expense, cat, des, date1, time1, s;
+    String expense, cat, des, date1, time1, uname,email,emailfb;
     Dbhandler dbh;
     int dy, mn, yr;
     private int mYear, mMonth, mDay, mHour, mMinute;
+    SharedPreferences share;
+    final ParseObject expensemanager = new ParseObject("expense");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +52,11 @@ public class Add extends ActionBarActivity implements android.view.View.OnClickL
         android.support.v7.app.ActionBar ab = getSupportActionBar();
         ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#0F62A6"));
         ab.setBackgroundDrawable(colorDrawable);
+        share=getSharedPreferences("UsernamePrefs", MODE_PRIVATE);
+        uname=share.getString("username", null);
+        email=share.getString("email", null);
+        System.out.println("Username:"+uname);
+        System.out.println(email);
         sp = (Spinner) findViewById(R.id.spinner1);
         tim = (Button) findViewById(R.id.timebtn);
         dat = (Button) findViewById(R.id.datebtn);
@@ -152,6 +171,56 @@ public class Add extends ActionBarActivity implements android.view.View.OnClickL
                 } else {
                     Toast.makeText(Add.this, "Failed", Toast.LENGTH_LONG).show();
                 }
+//                Dbhandler dbh=new Dbhandler(getApplicationContext());
+                int a1=dbh.resultid();
+                String b1=dbh.resultexp();
+                String c1=dbh.resultcat();
+                String d1=dbh.resultdesc();
+                String e1=dbh.resulttime();
+                String f1=dbh.resultdate();
+                share=getSharedPreferences("UsernamePrefs", MODE_PRIVATE);
+                emailfb=share.getString("emailfb",null);
+                uname=share.getString("username", null);
+                email=share.getString("email",null);
+                int abc= dbh.resultid1();
+                System.out.println("id:............" + abc);
+                expensemanager.put("ID", abc);
+                System.out.println("id:............" + abc);
+                expensemanager.put("Expense", b1);
+                expensemanager.put("Category", c1);
+                expensemanager.put("Description", d1);
+                expensemanager.put("Time", e1);
+                expensemanager.put("Date", f1);
+                expensemanager.put("UsernName",uname);
+                int ab=share.getInt("loginfb",0);
+                if(ab==1) {
+                    expensemanager.put("Email",emailfb);
+                }
+                else{
+                    expensemanager.put("Email", email);
+                }
+                if (isNetworkAvailable(getApplicationContext())==true)
+                {
+                    expensemanager.saveInBackground();
+                    System.out.println("Stored In Cloud.............");
+                }else {
+                    expensemanager.pinInBackground();
+                    System.out.println("Stored In Local.............");
+                }
+                expensemanager.saveEventually(new SaveCallback() {
+                    @Override
+                    public void done(ParseException e) {
+                        if (e == null) {
+                            Toast.makeText(getApplicationContext(), "Done!", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Not Done!!\n" + e.getMessage(), Toast.LENGTH_LONG).show();
+                            System.out.print(e.getMessage());
+                        }
+                    }
+                });
+                Intent inc=new Intent(Add.this,Add.class);
+                startActivity(inc);
+//                new NewAsync().execute("");
                 expen.setText("");
                 descpt.setText("");
             }
@@ -163,6 +232,104 @@ public class Add extends ActionBarActivity implements android.view.View.OnClickL
             Add.this.finish();
         }
     }
+//    public class NewAsync extends AsyncTask<String,Void,String>
+//    {
+//        @Override
+//        protected void onPreExecute() {
+//            super.onPreExecute();
+//        }
+//
+//        @Override
+//        protected void onPostExecute(String s) {
+//            super.onPostExecute(s);
+//        }
+//
+//        @Override
+//        protected String doInBackground(String... params) {
+//                Dbhandler dbh=new Dbhandler(getApplicationContext());
+//                int a1=dbh.resultid();
+//                String b1=dbh.resultexp();
+//                String c1=dbh.resultcat();
+//                String d1=dbh.resultdesc();
+//                String e1=dbh.resulttime();
+//                String f1=dbh.resultdate();
+//                share=getSharedPreferences("UsernamePrefs", MODE_PRIVATE);
+//                emailfb=share.getString("emailfb",null);
+//                uname=share.getString("username", null);
+//                email=share.getString("email",null);
+//               String abc= String.valueOf(dbh.resultid1());
+//                System.out.println("id:............" + abc);
+//
+//                expensemanager.put("id",abc);
+//                System.out.println("id:............" + abc);
+//                expensemanager.put("expense", b1);
+//                expensemanager.put("category", c1);
+//                expensemanager.put("description", d1);
+//                expensemanager.put("time", e1);
+//                expensemanager.put("date", f1);
+//                expensemanager.put("UsernName",uname);
+//                int ab=share.getInt("loginfb",0);
+//                if(ab==1) {
+//                    expensemanager.put("Email",emailfb);
+//                }
+//                else{
+//                    expensemanager.put("Email", email);
+//                }
+//                if (isNetworkAvailable(getApplicationContext())==true)
+//                {
+//                    expensemanager.saveInBackground();
+//                   System.out.println("Stored In Cloud.............");
+//                }else {
+//                    expensemanager.pinInBackground();
+//                    System.out.println("Stored In Local.............");
+//                }
+//                expensemanager.saveEventually(new SaveCallback() {
+//                    @Override
+//                    public void done(ParseException e) {
+//                        if (e == null) {
+//                            Toast.makeText(getApplicationContext(), "Done!", Toast.LENGTH_SHORT).show();
+//                        } else {
+//                            Toast.makeText(getApplicationContext(), "Not Done!!\n" + e.getMessage(), Toast.LENGTH_LONG).show();
+//                            System.out.print(e.getMessage());
+//                        }
+//                    }
+//                });
+//                Intent inc=new Intent(Add.this,Add.class);
+//                startActivity(inc);
+////                ParseQuery<ParseObject> query=ParseQuery.getQuery("expense");
+////                query.whereEqualTo("id","hD3EF94Kp2");
+////                query.getFirstInBackground(new GetCallback<ParseObject>() {
+////                    @Override
+////                    public void done(ParseObject parseObject, ParseException e) {
+////
+////                        if (parseObject != null) {
+////                            int id1 = expensemanager.getInt("id");
+////                            System.out.print(id1);
+////                        } else {
+////                            System.out.println("Something wrong.....................");
+////                        }
+////                    }
+////                });
+//
+//            return null;
+//        }
+//    }
+    private boolean isNetworkAvailable(Context context) {
+        ConnectivityManager connectivity = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivity != null) {
+            NetworkInfo[] info = connectivity.getAllNetworkInfo();
+            if (info != null) {
+                for (int i = 0; i < info.length; i++) {
+                    Log.w("INTERNET:",String.valueOf(i));
+                    if (info[i].getState() == NetworkInfo.State.CONNECTED) {
+                        Log.w("INTERNET:", "connected!");
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -172,7 +339,37 @@ public class Add extends ActionBarActivity implements android.view.View.OnClickL
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        return super.onOptionsItemSelected(item);
+        switch (item.getItemId())
+        {
+            case R.id.cloud:
+                Intent inc1=new Intent(getApplication(),CloudListView.class);
+                startActivity(inc1);
+                break;
+            case R.id.action_logout:
+                share=getSharedPreferences("UsernamePrefs", MODE_PRIVATE);
+                int s=share.getInt("loginvalue", 0);
+                if (s==0)
+                {
+                    ParseUser.logOut();
+                    ParseUser newUser = ParseUser.getCurrentUser();
+                    loadloginView();
+                }
+                else if (s==1){
+                    Intent a=new Intent(getApplicationContext(),FaceBookLogin.class);
+                    startActivity(a);
+                }
+                break;
+        }
+       return super.onOptionsItemSelected(item);
     }
+    public void loadloginView()
+    {
+        Intent intent=new Intent(this,ActivityLogin.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+    }
+
+
 
 }

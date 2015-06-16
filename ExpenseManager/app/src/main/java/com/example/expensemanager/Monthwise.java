@@ -23,7 +23,7 @@ public class Monthwise extends ActionBarActivity {
     TextView tv;
     int i = 0;
     int length;
-    UserAdapter myuser;
+    UserAdaptermon myuser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +59,7 @@ public class Monthwise extends ActionBarActivity {
                 if (length == 0) {
                     Toast.makeText(Monthwise.this, "No Records Found!", Toast.LENGTH_LONG).show();
                 } else {
-                    myuser = new UserAdapter(getApplicationContext(), dbh.monthWiseData(1));
+                    myuser = new UserAdaptermon(getApplicationContext(), dbh.monthWiseData(1));
                     lvv.setAdapter(myuser);
                 }
                 break;
@@ -72,7 +72,7 @@ public class Monthwise extends ActionBarActivity {
                 if (result.isEmpty() == true) {
                     Toast.makeText(Monthwise.this, "No Records Found!", Toast.LENGTH_LONG).show();
                 } else {
-                    myuser = new UserAdapter(getApplicationContext(), dbh.monthWiseData(2));
+                    myuser = new UserAdaptermon(getApplicationContext(), dbh.monthWiseData(2));
                     lvv.setAdapter(myuser);
                 }
                 break;
@@ -85,7 +85,7 @@ public class Monthwise extends ActionBarActivity {
                 if (result.isEmpty() == true) {
                     Toast.makeText(Monthwise.this, "No Records Found!", Toast.LENGTH_LONG).show();
                 } else {
-                    myuser = new UserAdapter(getApplicationContext(), dbh.monthWiseData(3));
+                    myuser = new UserAdaptermon(getApplicationContext(), dbh.monthWiseData(3));
                     lvv.setAdapter(myuser);
                 }
                 break;
@@ -98,7 +98,7 @@ public class Monthwise extends ActionBarActivity {
                 if (result.isEmpty() == true) {
                     Toast.makeText(Monthwise.this, "No Records Found!", Toast.LENGTH_LONG).show();
                 } else {
-                    myuser = new UserAdapter(getApplicationContext(), dbh.monthWiseData(4));
+                    myuser = new UserAdaptermon(getApplicationContext(), dbh.monthWiseData(4));
                     lvv.setAdapter(myuser);
                 }
                 break;
@@ -111,7 +111,7 @@ public class Monthwise extends ActionBarActivity {
                 if (result.isEmpty() == true) {
                     Toast.makeText(Monthwise.this, "No Records Found!", Toast.LENGTH_LONG).show();
                 } else {
-                    myuser = new UserAdapter(getApplicationContext(), dbh.monthWiseData(5));
+                    myuser = new UserAdaptermon(getApplicationContext(), dbh.monthWiseData(5));
                     lvv.setAdapter(myuser);
                 }
                 break;
@@ -124,7 +124,7 @@ public class Monthwise extends ActionBarActivity {
                 if (result.isEmpty() == true) {
                     Toast.makeText(Monthwise.this, "No Records Found!", Toast.LENGTH_LONG).show();
                 } else {
-                    myuser = new UserAdapter(getApplicationContext(), dbh.monthWiseData(6));
+                    myuser = new UserAdaptermon(getApplicationContext(), dbh.monthWiseData(6));
                     lvv.setAdapter(myuser);
                 }
                 break;
@@ -137,7 +137,7 @@ public class Monthwise extends ActionBarActivity {
                 if (result.isEmpty() == true) {
                     Toast.makeText(Monthwise.this, "No Records Found!", Toast.LENGTH_LONG).show();
                 } else {
-                    myuser = new UserAdapter(getApplicationContext(), dbh.monthWiseData(7));
+                    myuser = new UserAdaptermon(getApplicationContext(), dbh.monthWiseData(7));
                     lvv.setAdapter(myuser);
                 }
                 break;
@@ -150,7 +150,7 @@ public class Monthwise extends ActionBarActivity {
                 if (result.isEmpty() == true) {
                     Toast.makeText(Monthwise.this, "No Records Found!", Toast.LENGTH_LONG).show();
                 } else {
-                    myuser = new UserAdapter(getApplicationContext(), dbh.monthWiseData(8));
+                    myuser = new UserAdaptermon(getApplicationContext(), dbh.monthWiseData(8));
                     lvv.setAdapter(myuser);
                 }
                 break;
@@ -163,7 +163,7 @@ public class Monthwise extends ActionBarActivity {
                 if (result.isEmpty() == true) {
                     Toast.makeText(Monthwise.this, "No Records Found!", Toast.LENGTH_LONG).show();
                 } else {
-                    myuser = new UserAdapter(getApplicationContext(), dbh.monthWiseData(9));
+                    myuser = new UserAdaptermon(getApplicationContext(), dbh.monthWiseData(9));
                     lvv.setAdapter(myuser);
                 }
                 break;
@@ -176,7 +176,7 @@ public class Monthwise extends ActionBarActivity {
                 if (result.isEmpty() == true) {
                     Toast.makeText(Monthwise.this, "No Records Found!", Toast.LENGTH_LONG).show();
                 } else {
-                    myuser = new UserAdapter(getApplicationContext(), dbh.monthWiseData(10));
+                    myuser = new UserAdaptermon(getApplicationContext(), dbh.monthWiseData(10));
                     lvv.setAdapter(myuser);
                 }
                 break;
@@ -189,7 +189,7 @@ public class Monthwise extends ActionBarActivity {
                 if (result.isEmpty() == true) {
                     Toast.makeText(Monthwise.this, "No Records Found!", Toast.LENGTH_LONG).show();
                 } else {
-                    myuser = new UserAdapter(getApplicationContext(), dbh.monthWiseData(11));
+                    myuser = new UserAdaptermon(getApplicationContext(), dbh.monthWiseData(11));
                     lvv.setAdapter(myuser);
                 }
                 break;
@@ -202,7 +202,7 @@ public class Monthwise extends ActionBarActivity {
                 if (result.isEmpty() == true) {
                     Toast.makeText(Monthwise.this, "No Records Found!", Toast.LENGTH_LONG).show();
                 } else {
-                    myuser = new UserAdapter(getApplicationContext(), dbh.monthWiseData(12));
+                    myuser = new UserAdaptermon(getApplicationContext(), dbh.monthWiseData(12));
                     lvv.setAdapter(myuser);
                 }
                 break;
