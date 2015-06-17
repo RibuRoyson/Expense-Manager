@@ -52,6 +52,9 @@ public class Add extends ActionBarActivity implements android.view.View.OnClickL
         android.support.v7.app.ActionBar ab = getSupportActionBar();
         ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#0F62A6"));
         ab.setBackgroundDrawable(colorDrawable);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.drawable.expsmall);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
         share=getSharedPreferences("UsernamePrefs", MODE_PRIVATE);
         uname=share.getString("username", null);
         email=share.getString("email", null);
@@ -369,7 +372,20 @@ public class Add extends ActionBarActivity implements android.view.View.OnClickL
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
+//    @Override
+//    public void onBackPressed() {
+//        super.onBackPressed();
+//        Intent obj=new Intent(Intent.ACTION_MAIN);
+//        obj.addCategory(Intent.CATEGORY_HOME);
+//        obj.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//        startActivity(obj);
+//    }
 
 
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent inab=new Intent(getApplicationContext(),Activitymain.class);
+        startActivity(inab);
+    }
 }

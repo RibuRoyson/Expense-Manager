@@ -1,6 +1,7 @@
 package com.example.expensemanager;
 
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.widget.Toast;
@@ -23,6 +24,12 @@ public class TotalGraph extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.totalgraph);
+        android.support.v7.app.ActionBar ab = getSupportActionBar();
+        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#0F62A6"));
+        ab.setBackgroundDrawable(colorDrawable);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.drawable.expsmall);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
         final Calendar c = Calendar.getInstance();
         dbh = new Dbhandler(getApplicationContext());
         result = dbh.totaldaywise();

@@ -35,6 +35,9 @@ public class EditData extends ActionBarActivity {
         android.support.v7.app.ActionBar ab = getSupportActionBar();
         ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#0F62A6"));
         ab.setBackgroundDrawable(colorDrawable);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.drawable.expsmall);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
         exp = (EditText) findViewById(R.id.expet);
         cat = (EditText) findViewById(R.id.catet);
         desc = (EditText) findViewById(R.id.deset);

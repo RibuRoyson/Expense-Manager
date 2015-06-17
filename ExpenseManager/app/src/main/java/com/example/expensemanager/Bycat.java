@@ -26,6 +26,9 @@ public class Bycat extends ActionBarActivity {
         android.support.v7.app.ActionBar ab = getSupportActionBar();
         ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#0F62A6"));
         ab.setBackgroundDrawable(colorDrawable);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.drawable.expsmall);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
         Button catbut=(Button)findViewById(R.id.catbut);
 //        Spinner spcat=(Spinner)findViewById(R.id.spincat);
 //        String [] items={"Select Category"};

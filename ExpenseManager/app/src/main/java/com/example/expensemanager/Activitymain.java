@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.facebook.FacebookSdk;
+import com.facebook.login.LoginManager;
 import com.parse.ParseUser;
 
 public class Activitymain extends ActionBarActivity {
@@ -25,6 +26,9 @@ public class Activitymain extends ActionBarActivity {
         android.support.v7.app.ActionBar ab = getSupportActionBar();
         ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#0F62A6"));
         ab.setBackgroundDrawable(colorDrawable);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.drawable.expsmall);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
 //        ab.setIcon(R.drawable.expense);
 
     }
@@ -86,8 +90,9 @@ public class Activitymain extends ActionBarActivity {
                     loadloginView();
                 }
                 else if (s==1){
-                    Intent a=new Intent(getApplicationContext(),FaceBookLogin.class);
-                    startActivity(a);
+                    LoginManager.getInstance().logOut();
+                    ParseUser.logOut();
+                    loadloginView();
                 }
                 break;
         }

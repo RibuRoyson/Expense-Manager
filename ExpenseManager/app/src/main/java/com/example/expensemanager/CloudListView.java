@@ -2,6 +2,8 @@ package com.example.expensemanager;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
@@ -29,6 +31,12 @@ public class CloudListView extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cloudlistview);
+        android.support.v7.app.ActionBar abc = getSupportActionBar();
+        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#0F62A6"));
+        abc.setBackgroundDrawable(colorDrawable);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.drawable.expsmall);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
         final ArrayList<String> notesid=new ArrayList<String>();
         final ArrayList<String> object=new ArrayList<String>();
         final ArrayList<String> notesexp=new ArrayList<String>();

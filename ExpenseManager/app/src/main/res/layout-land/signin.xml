@@ -16,13 +16,13 @@
         android:orientation="vertical"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
-        android:weightSum="1.5">
+        android:weightSum="2.0">
         <EditText
             android:id="@+id/usernameField"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.5"
-            android:hint="Username/Email:"/>
+            android:hint="Username:"/>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -39,6 +39,11 @@
             android:layout_weight="0.5"
             android:text="Sign in"
             android:onClick="signin"/>
+        <com.facebook.login.widget.LoginButton
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.5"
+            android:id="@+id/login_button1"/>
 
     </LinearLayout>
     <TextView

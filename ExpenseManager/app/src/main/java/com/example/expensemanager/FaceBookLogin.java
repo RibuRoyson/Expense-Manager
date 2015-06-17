@@ -13,6 +13,7 @@ import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
+import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.parse.ParseException;
@@ -38,6 +39,7 @@ public class FaceBookLogin extends ActionBarActivity {
         callbackmanager=CallbackManager.Factory.create();
         login=(LoginButton)findViewById(R.id.login_button);
         login.setReadPermissions(Arrays.asList("public_profile", "email"));
+
         login.registerCallback(callbackmanager, new FacebookCallback<LoginResult>() {
 
             @Override
@@ -47,6 +49,8 @@ public class FaceBookLogin extends ActionBarActivity {
                     public void onCompleted(JSONObject jsonObject, GraphResponse graphResponse) {
                         if (graphResponse.getError() != null) {
                             System.out.println(graphResponse.getError().toString());
+//                            Intent in=new Intent(getApplicationContext(),ActivityLogin.class);
+//                            startActivity(in);
                         } else {
                             String emailid = jsonObject.optString("email");
                             String id = jsonObject.optString("id");
@@ -86,7 +90,7 @@ public class FaceBookLogin extends ActionBarActivity {
 ////                Toast.makeText(getApplicationContext(),"User ID:"+loginResult.getAccessToken().getUserId(),Toast.LENGTH_LONG).show();
 //                Toast.makeText(getApplicationContext(), "Auth Token:" + loginResult.getAccessToken().getToken(), Toast.LENGTH_LONG).show();
 ////                    new async().execute("");
-//                System.out.println("UserId:" + loginResult.getAccessToken().getUserId());
+                System.out.println("UserId:" + loginResult.getAccessToken().getUserId());
             }
 
 //            @Override
@@ -113,12 +117,15 @@ public class FaceBookLogin extends ActionBarActivity {
                 Toast.makeText(getApplicationContext(), "Login Attempt Cancel!!", Toast.LENGTH_SHORT).show();
             }
 
+
             @Override
             public void onError(FacebookException e) {
                 Toast.makeText(getApplicationContext(), "Login Attempt Failed!!", Toast.LENGTH_SHORT).show();
             }
 
+
         });
+       /// LoginManager.getInstance().logOut();
 
 
     }
