@@ -28,6 +28,7 @@ public class Sandwitch extends ActionBarActivity {
         }
         else {
             Intent intentabcd=new Intent(this,ActivityLogin.class);
+            Sandwitch.this.finish();
             startActivity(intentabcd);
         }
     }

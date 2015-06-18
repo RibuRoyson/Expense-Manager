@@ -1,5 +1,6 @@
 package com.example.expensemanager;
 
+import android.accounts.Account;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -21,7 +22,6 @@ public class Activitymain extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activitymain);
         android.support.v7.app.ActionBar ab = getSupportActionBar();
         ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#0F62A6"));
@@ -95,9 +95,17 @@ public class Activitymain extends ActionBarActivity {
                     loadloginView();
                 }
                 break;
+
         }
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+
+        return super.onPrepareOptionsMenu(menu);
+    }
+
     public void loadloginView()
     {
         Intent intent=new Intent(this,ActivityLogin.class);

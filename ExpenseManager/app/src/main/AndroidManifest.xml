@@ -111,10 +111,7 @@
             android:name=".CloudListView"
             android:label="@string/app_name"
             android:theme="@style/AppTheme"/>
-        <activity
-            android:name=".FaceBookLogin"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme"/>
+
         <activity android:name="com.facebook.FacebookActivity"
             android:configChanges=
                 "keyboard|keyboardHidden|screenLayout|screenSize|orientation"

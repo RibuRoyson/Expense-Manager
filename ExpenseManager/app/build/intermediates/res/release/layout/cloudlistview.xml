@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ListView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/list"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/a4">
+
+</ListView><!-- From: file:/home/imrokraft/Android%20Trainees/Ribu/AndroidStudioProjects/ExpenseManager/app/src/main/res/layout/cloudlistview.xml -->

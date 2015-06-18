@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/aboutus" android:title="About Us"></item>
+</menu><!-- From: file:/home/imrokraft/Android%20Trainees/Ribu/AndroidStudioProjects/ExpenseManager/app/src/main/res/menu/aboutus.xml -->

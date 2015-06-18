@@ -1,6 +1,7 @@
 package com.example.expensemanager;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -25,14 +26,19 @@ import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.parse.FindCallback;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by imrokraft on 16/6/15.
@@ -44,7 +50,8 @@ public class ActivityLogin extends ActionBarActivity {
     private CallbackManager callbackmanager;
     protected TextView signUpButton;
     private LoginButton login;
-
+    ProgressDialog pd;
+    final ArrayList<String> notesid=new ArrayList<String>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
@@ -90,15 +97,17 @@ public class ActivityLogin extends ActionBarActivity {
 
                     //                    setProgressBarIndeterminateVisibility(true);
                     final String finalUsername = username;
+                    final String finalPassword = password;
                     ParseUser.logInInBackground(username, password, new LogInCallback() {
                         @Override
                         public void done(ParseUser newUser, ParseException e) {
                             if (e == null) {
-                                Toast.makeText(getApplicationContext(), "Logging in...", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "Log in as"+finalUsername, Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(ActivityLogin.this, Sandwitch.class);
                                 SharedPreferences sharenew = getSharedPreferences("UsernamePrefs", Context.MODE_PRIVATE);
                                 SharedPreferences.Editor editornew = sharenew.edit();
                                 editornew.putString("username", finalUsername);
+                                editornew.putString("email",newUser.getEmail());
                                 editornew.putInt("loginfb", 0);
                                 editornew.commit();
 //                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -137,7 +146,7 @@ public class ActivityLogin extends ActionBarActivity {
                             String id = jsonObject.optString("id");
                             String fname = jsonObject.optString("first_name");
                             String lname = jsonObject.optString("last_name");
-                            StringBuffer sb = new StringBuffer();
+                            final StringBuffer sb = new StringBuffer();
                             sb.append(fname).append(lname);
                             System.out.println(sb);
                             System.out.println("Email:" + emailid);
@@ -149,18 +158,20 @@ public class ActivityLogin extends ActionBarActivity {
                             editor.commit();
                             ParseUser newUser = new ParseUser();
                             newUser.setUsername(String.valueOf(sb));
-                            newUser.setPassword(id);
+                            newUser.setPassword(emailid);
                             newUser.setEmail(emailid);
                             newUser.signUpInBackground(new SignUpCallback() {
                                 @Override
                                 public void done(ParseException e) {
+                                    pd=ProgressDialog.show(ActivityLogin.this,"Expense manager","Loading..");
+                                    pd.show();
                                     Intent intent = new Intent(ActivityLogin.this, Activitymain.class);
+                                    Toast.makeText(getApplicationContext(),"Logging as"+sb,Toast.LENGTH_SHORT).show();
                                     SharedPreferences sharefb = getSharedPreferences("UsernamePrefs", Context.MODE_PRIVATE);
                                     SharedPreferences.Editor editorfb = sharefb.edit();
                                     editorfb.putInt("loginvalue", 1);
                                     editorfb.putInt("loginfb", 1);
                                     editorfb.commit();
-                                    Toast.makeText(getApplicationContext(), "Signup Successful", Toast.LENGTH_SHORT).show();
                                     startActivity(intent);
                                 }
                             });
@@ -212,7 +223,34 @@ public class ActivityLogin extends ActionBarActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         callbackmanager.onActivityResult(requestCode, resultCode, data);
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+//        finish();
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.aboutus, menu);
+//        return super.onCreateOptionsMenu(menu);
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        switch (item.getItemId())
+//        {
+//            case R.id.aboutus:
+//                Intent in=new Intent(getApplicationContext(),Aboutus.class);
+//                startActivity(in);
+//                break;
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
+}
 
 
 

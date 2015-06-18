@@ -11,6 +11,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -25,6 +26,7 @@ import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.facebook.login.LoginManager;
 import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -33,6 +35,7 @@ import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 public class Add extends ActionBarActivity implements android.view.View.OnClickListener {
     Spinner sp;
@@ -111,12 +114,13 @@ public class Add extends ActionBarActivity implements android.view.View.OnClickL
             mDay = c.get(Calendar.DAY_OF_MONTH);
 
             // Launch Date Picker Dialog
-            DatePickerDialog dpd = new DatePickerDialog(this,
+           DatePickerDialog dpd = new DatePickerDialog(this,
                     new DatePickerDialog.OnDateSetListener() {
 
                         @Override
                         public void onDateSet(DatePicker view, int year,
                                               int monthOfYear, int dayOfMonth) {
+
                             // Display Selected date in textbox
                             dat.setText(dayOfMonth + "-"
                                     + (monthOfYear + 1) + "-" + year);
@@ -125,6 +129,7 @@ public class Add extends ActionBarActivity implements android.view.View.OnClickL
                             yr = year;
                         }
                     }, mYear, mMonth, mDay);
+            dpd.getDatePicker().setMaxDate(System.currentTimeMillis());
             dpd.show();
         }
         if (v == tim) {
@@ -145,7 +150,12 @@ public class Add extends ActionBarActivity implements android.view.View.OnClickL
                             tim.setText(hourOfDay + ":" + minute);
                         }
                     }, mHour, mMinute, false);
-            tpd.show();
+//            if (c.after(GregorianCalendar.getInstance()))
+//            {
+//
+//            }else {
+           tpd.show();
+//            }
         }
         if (v == save) {
             Log.e("reached", "save");
@@ -358,8 +368,9 @@ public class Add extends ActionBarActivity implements android.view.View.OnClickL
                     loadloginView();
                 }
                 else if (s==1){
-                    Intent a=new Intent(getApplicationContext(),FaceBookLogin.class);
-                    startActivity(a);
+                    LoginManager.getInstance().logOut();
+                    ParseUser.logOut();
+                    loadloginView();
                 }
                 break;
         }
