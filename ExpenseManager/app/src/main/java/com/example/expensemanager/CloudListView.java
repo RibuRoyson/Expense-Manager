@@ -64,7 +64,7 @@ public class CloudListView extends ActionBarActivity {
         int ab=share.getInt("loginfb", 0);
         if (ab==1)
         {
-            emailfb=share.getString("emailfb",null);
+            emailfb=share.getString("email",null);
             ParseQuery<ParseObject> query1 = ParseQuery.getQuery("expense");
             query1.whereEqualTo("Email",emailfb);
             query1.findInBackground(new FindCallback<ParseObject>() {

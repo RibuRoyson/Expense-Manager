@@ -9,9 +9,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -27,26 +25,23 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.facebook.login.LoginManager;
-import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
-import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 
 public class Add extends ActionBarActivity implements android.view.View.OnClickListener {
+    final ParseObject expensemanager = new ParseObject("expense");
     Spinner sp;
     Button tim, dat, save, show;
-    EditText time, date, expen, descpt;
-    String expense, cat, des, date1, time1, uname,email,emailfb;
+    EditText expen, descpt;
+    String expense, cat, des, date1, time1, uname, email, emailfb;
     Dbhandler dbh;
     int dy, mn, yr;
-    private int mYear, mMonth, mDay, mHour, mMinute;
     SharedPreferences share;
-    final ParseObject expensemanager = new ParseObject("expense");
+    private int mYear, mMonth, mDay, mHour, mMinute;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,11 +53,9 @@ public class Add extends ActionBarActivity implements android.view.View.OnClickL
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setLogo(R.drawable.expsmall);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
-        share=getSharedPreferences("UsernamePrefs", MODE_PRIVATE);
-        uname=share.getString("username", null);
-        email=share.getString("email", null);
-        System.out.println("Username:"+uname);
-        System.out.println(email);
+        share = getSharedPreferences("UsernamePrefs", MODE_PRIVATE);
+        uname = share.getString("username", null);
+        email = share.getString("email", null);
         sp = (Spinner) findViewById(R.id.spinner1);
         tim = (Button) findViewById(R.id.timebtn);
         dat = (Button) findViewById(R.id.datebtn);
@@ -74,11 +67,8 @@ public class Add extends ActionBarActivity implements android.view.View.OnClickL
         dat.setOnClickListener(this);
         save.setOnClickListener(this);
         show.setOnClickListener(this);
-        String [] items={"Drinks","Dress","Food","Others","Personal","Utilities"};
-        CustomArrayAdapter<String> myadapter= new CustomArrayAdapter<String>(this,items);
-//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, val);
-
-//        sp.setPrompt("Select");
+        String[] items = {"Drinks", "Dress", "Food", "Others", "Personal", "Utilities"};
+        CustomArrayAdapter<String> myadapter = new CustomArrayAdapter<String>(this, items);
         sp.setAdapter(myadapter);
         sp.setPrompt("Select an Item");
         sp.setOnItemSelectedListener(new OnItemSelectedListener() {
@@ -101,7 +91,6 @@ public class Add extends ActionBarActivity implements android.view.View.OnClickL
     }
 
 
-
     @Override
     public void onClick(View v) {
         // TODO Auto-generated method stub
@@ -114,7 +103,7 @@ public class Add extends ActionBarActivity implements android.view.View.OnClickL
             mDay = c.get(Calendar.DAY_OF_MONTH);
 
             // Launch Date Picker Dialog
-           DatePickerDialog dpd = new DatePickerDialog(this,
+            DatePickerDialog dpd = new DatePickerDialog(this,
                     new DatePickerDialog.OnDateSetListener() {
 
                         @Override
@@ -150,24 +139,27 @@ public class Add extends ActionBarActivity implements android.view.View.OnClickL
                             tim.setText(hourOfDay + ":" + minute);
                         }
                     }, mHour, mMinute, false);
-//            if (c.after(GregorianCalendar.getInstance()))
-//            {
-//
-//            }else {
-           tpd.show();
-//            }
+
+            tpd.show();
+
         }
         if (v == save) {
-            Log.e("reached", "save");
-            expense=expen.getText().toString();
+
+            expense = expen.getText().toString();
             des = descpt.getText().toString();
             time1 = tim.getText().toString();
             date1 = dat.getText().toString();
-            if(expense.equals("")) {
-                Toast.makeText(getApplicationContext(),"Enter a value as expense",Toast.LENGTH_SHORT).show();
-            }else if (des.equals(""))
+            if (expense.equals("")) {
+                Toast.makeText(getApplicationContext(), "Enter a value as expense", Toast.LENGTH_SHORT).show();
+            } else if (des.equals("")) {
+                Toast.makeText(getApplicationContext(), "Enter a description", Toast.LENGTH_SHORT).show();
+            } else if (time1.matches(".*\\d+.*")==false)
             {
-                Toast.makeText(getApplicationContext(),"Enter a description",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Enter a time", Toast.LENGTH_SHORT).show();
+            }else if (date1.matches(".*\\d+.*")==false)
+            {
+                Toast.makeText(getApplicationContext(), "Enter a date", Toast.LENGTH_SHORT).show();
+
             }else
             {
                 int id = -1;
@@ -184,39 +176,37 @@ public class Add extends ActionBarActivity implements android.view.View.OnClickL
                 } else {
                     Toast.makeText(Add.this, "Failed", Toast.LENGTH_LONG).show();
                 }
-//                Dbhandler dbh=new Dbhandler(getApplicationContext());
-                int a1=dbh.resultid();
-                String b1=dbh.resultexp();
-                String c1=dbh.resultcat();
-                String d1=dbh.resultdesc();
-                String e1=dbh.resulttime();
-                String f1=dbh.resultdate();
-                share=getSharedPreferences("UsernamePrefs", MODE_PRIVATE);
-                emailfb=share.getString("emailfb",null);
-                uname=share.getString("username", null);
-                email=share.getString("email",null);
-                int abc= dbh.resultid1();
-                System.out.println("id:............" + abc);
+
+
+                String b1 = dbh.resultexp();
+                String c1 = dbh.resultcat();
+                String d1 = dbh.resultdesc();
+                String e1 = dbh.resulttime();
+                String f1 = dbh.resultdate();
+                share = getSharedPreferences("UsernamePrefs", MODE_PRIVATE);
+                emailfb = share.getString("email", null);
+                uname = share.getString("username", null);
+                email = share.getString("email", null);
+                int abc = dbh.resultid1();
+
                 expensemanager.put("ID", abc);
-                System.out.println("id:............" + abc);
+
                 expensemanager.put("Expense", b1);
                 expensemanager.put("Category", c1);
                 expensemanager.put("Description", d1);
                 expensemanager.put("Time", e1);
                 expensemanager.put("Date", f1);
-                expensemanager.put("UsernName",uname);
-                int ab=share.getInt("loginfb",0);
-                if(ab==1) {
-                    expensemanager.put("Email",emailfb);
-                }
-                else{
+                expensemanager.put("UsernName", uname);
+                int ab = share.getInt("loginfb", 0);
+                if (ab == 1) {
+                    expensemanager.put("Email", emailfb);
+                } else {
                     expensemanager.put("Email", email);
                 }
-                if (isNetworkAvailable(getApplicationContext())==true)
-                {
+                if (isNetworkAvailable(getApplicationContext()) == true) {
                     expensemanager.saveInBackground();
                     System.out.println("Stored In Cloud.............");
-                }else {
+                } else {
                     expensemanager.pinInBackground();
                     System.out.println("Stored In Local.............");
                 }
@@ -227,13 +217,13 @@ public class Add extends ActionBarActivity implements android.view.View.OnClickL
                             Toast.makeText(getApplicationContext(), "Done!", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(getApplicationContext(), "Not Done!!\n" + e.getMessage(), Toast.LENGTH_LONG).show();
-                            System.out.print(e.getMessage());
+
                         }
                     }
                 });
-                Intent inc=new Intent(Add.this,Add.class);
+                Intent inc = new Intent(Add.this, Add.class);
                 startActivity(inc);
-//                new NewAsync().execute("");
+
                 expen.setText("");
                 descpt.setText("");
             }
@@ -245,95 +235,14 @@ public class Add extends ActionBarActivity implements android.view.View.OnClickL
             Add.this.finish();
         }
     }
-//    public class NewAsync extends AsyncTask<String,Void,String>
-//    {
-//        @Override
-//        protected void onPreExecute() {
-//            super.onPreExecute();
-//        }
-//
-//        @Override
-//        protected void onPostExecute(String s) {
-//            super.onPostExecute(s);
-//        }
-//
-//        @Override
-//        protected String doInBackground(String... params) {
-//                Dbhandler dbh=new Dbhandler(getApplicationContext());
-//                int a1=dbh.resultid();
-//                String b1=dbh.resultexp();
-//                String c1=dbh.resultcat();
-//                String d1=dbh.resultdesc();
-//                String e1=dbh.resulttime();
-//                String f1=dbh.resultdate();
-//                share=getSharedPreferences("UsernamePrefs", MODE_PRIVATE);
-//                emailfb=share.getString("emailfb",null);
-//                uname=share.getString("username", null);
-//                email=share.getString("email",null);
-//               String abc= String.valueOf(dbh.resultid1());
-//                System.out.println("id:............" + abc);
-//
-//                expensemanager.put("id",abc);
-//                System.out.println("id:............" + abc);
-//                expensemanager.put("expense", b1);
-//                expensemanager.put("category", c1);
-//                expensemanager.put("description", d1);
-//                expensemanager.put("time", e1);
-//                expensemanager.put("date", f1);
-//                expensemanager.put("UsernName",uname);
-//                int ab=share.getInt("loginfb",0);
-//                if(ab==1) {
-//                    expensemanager.put("Email",emailfb);
-//                }
-//                else{
-//                    expensemanager.put("Email", email);
-//                }
-//                if (isNetworkAvailable(getApplicationContext())==true)
-//                {
-//                    expensemanager.saveInBackground();
-//                   System.out.println("Stored In Cloud.............");
-//                }else {
-//                    expensemanager.pinInBackground();
-//                    System.out.println("Stored In Local.............");
-//                }
-//                expensemanager.saveEventually(new SaveCallback() {
-//                    @Override
-//                    public void done(ParseException e) {
-//                        if (e == null) {
-//                            Toast.makeText(getApplicationContext(), "Done!", Toast.LENGTH_SHORT).show();
-//                        } else {
-//                            Toast.makeText(getApplicationContext(), "Not Done!!\n" + e.getMessage(), Toast.LENGTH_LONG).show();
-//                            System.out.print(e.getMessage());
-//                        }
-//                    }
-//                });
-//                Intent inc=new Intent(Add.this,Add.class);
-//                startActivity(inc);
-////                ParseQuery<ParseObject> query=ParseQuery.getQuery("expense");
-////                query.whereEqualTo("id","hD3EF94Kp2");
-////                query.getFirstInBackground(new GetCallback<ParseObject>() {
-////                    @Override
-////                    public void done(ParseObject parseObject, ParseException e) {
-////
-////                        if (parseObject != null) {
-////                            int id1 = expensemanager.getInt("id");
-////                            System.out.print(id1);
-////                        } else {
-////                            System.out.println("Something wrong.....................");
-////                        }
-////                    }
-////                });
-//
-//            return null;
-//        }
-//    }
+
     private boolean isNetworkAvailable(Context context) {
         ConnectivityManager connectivity = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         if (connectivity != null) {
             NetworkInfo[] info = connectivity.getAllNetworkInfo();
             if (info != null) {
                 for (int i = 0; i < info.length; i++) {
-                    Log.w("INTERNET:",String.valueOf(i));
+                    Log.w("INTERNET:", String.valueOf(i));
                     if (info[i].getState() == NetworkInfo.State.CONNECTED) {
                         Log.w("INTERNET:", "connected!");
                         return true;
@@ -346,57 +255,46 @@ public class Add extends ActionBarActivity implements android.view.View.OnClickL
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main,menu);
+        getMenuInflater().inflate(R.menu.main, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId())
-        {
+        switch (item.getItemId()) {
             case R.id.cloud:
-                Intent inc1=new Intent(getApplication(),CloudListView.class);
+                Intent inc1 = new Intent(getApplication(), CloudListView.class);
                 startActivity(inc1);
                 break;
             case R.id.action_logout:
-                share=getSharedPreferences("UsernamePrefs", MODE_PRIVATE);
-                int s=share.getInt("loginvalue", 0);
-                if (s==0)
-                {
+                share = getSharedPreferences("UsernamePrefs", MODE_PRIVATE);
+                int s = share.getInt("loginvalue", 0);
+                if (s == 0) {
                     ParseUser.logOut();
                     ParseUser newUser = ParseUser.getCurrentUser();
                     loadloginView();
-                }
-                else if (s==1){
+                } else if (s == 1) {
                     LoginManager.getInstance().logOut();
                     ParseUser.logOut();
                     loadloginView();
                 }
                 break;
         }
-       return super.onOptionsItemSelected(item);
+        return super.onOptionsItemSelected(item);
     }
-    public void loadloginView()
-    {
-        Intent intent=new Intent(this,ActivityLogin.class);
+
+    public void loadloginView() {
+        Intent intent = new Intent(this, ActivityLogin.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
-//    @Override
-//    public void onBackPressed() {
-//        super.onBackPressed();
-//        Intent obj=new Intent(Intent.ACTION_MAIN);
-//        obj.addCategory(Intent.CATEGORY_HOME);
-//        obj.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//        startActivity(obj);
-//    }
 
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent inab=new Intent(getApplicationContext(),Activitymain.class);
+        Intent inab = new Intent(getApplicationContext(), Activitymain.class);
         startActivity(inab);
     }
 }

@@ -1511,7 +1511,7 @@ containing a value of this type.
         public static final int action_bar_subtitle=0x7f0b0030;
         public static final int action_bar_title=0x7f0b002f;
         public static final int action_context_bar=0x7f0b0043;
-        public static final int action_logout=0x7f0b00b7;
+        public static final int action_logout=0x7f0b00b6;
         public static final int action_menu_divider=0x7f0b0002;
         public static final int action_menu_presenter=0x7f0b0003;
         public static final int action_mode_bar=0x7f0b003f;
@@ -1519,8 +1519,8 @@ containing a value of this type.
         public static final int action_mode_close_button=0x7f0b0031;
         public static final int activity_chooser_view_content=0x7f0b0032;
         public static final int always=0x7f0b0016;
-        public static final int apr=0x7f0b00bb;
-        public static final int aug=0x7f0b00bf;
+        public static final int apr=0x7f0b00ba;
+        public static final int aug=0x7f0b00be;
         public static final int automatic=0x7f0b002a;
         public static final int beginning=0x7f0b0013;
         public static final int bottom=0x7f0b0024;
@@ -1546,7 +1546,7 @@ containing a value of this type.
         public static final int dateet=0x7f0b0095;
         public static final int datetxt=0x7f0b0094;
         public static final int daywisegraph=0x7f0b0076;
-        public static final int dec=0x7f0b00c3;
+        public static final int dec=0x7f0b00c2;
         public static final int decor_content_parent=0x7f0b0040;
         public static final int default_activity_button=0x7f0b0035;
         public static final int dele2=0x7f0b00b5;
@@ -1571,8 +1571,7 @@ containing a value of this type.
         public static final int expanded_menu=0x7f0b0039;
         public static final int expensetxt=0x7f0b0088;
         public static final int expet=0x7f0b0089;
-        public static final int facebookitem=0x7f0b00b6;
-        public static final int feb=0x7f0b00b9;
+        public static final int feb=0x7f0b00b8;
         public static final int food=0x7f0b00af;
         public static final int foodtxt=0x7f0b0069;
         public static final int graph=0x7f0b0099;
@@ -1593,9 +1592,9 @@ containing a value of this type.
         public static final int imageviewmonths=0x7f0b007c;
         public static final int imageviewtotal=0x7f0b007d;
         public static final int inline=0x7f0b0025;
-        public static final int janu=0x7f0b00b8;
-        public static final int jul=0x7f0b00be;
-        public static final int jun=0x7f0b00bd;
+        public static final int janu=0x7f0b00b7;
+        public static final int jul=0x7f0b00bd;
+        public static final int jun=0x7f0b00bc;
         public static final int large=0x7f0b002d;
         public static final int left=0x7f0b0028;
         public static final int linear1=0x7f0b0050;
@@ -1612,8 +1611,8 @@ containing a value of this type.
         public static final int list_item=0x7f0b0036;
         public static final int loginButton=0x7f0b00a4;
         public static final int login_button1=0x7f0b00a5;
-        public static final int mar=0x7f0b00ba;
-        public static final int may=0x7f0b00bc;
+        public static final int mar=0x7f0b00b9;
+        public static final int may=0x7f0b00bb;
         public static final int messenger_send_button=0x7f0b0084;
         public static final int middle=0x7f0b0015;
         public static final int monbut=0x7f0b0085;
@@ -1624,8 +1623,8 @@ containing a value of this type.
         public static final int newpass=0x7f0b0097;
         public static final int none=0x7f0b000e;
         public static final int normal=0x7f0b000a;
-        public static final int nov=0x7f0b00c2;
-        public static final int oct=0x7f0b00c1;
+        public static final int nov=0x7f0b00c1;
+        public static final int oct=0x7f0b00c0;
         public static final int open_graph=0x7f0b001e;
         public static final int others=0x7f0b00b0;
         public static final int otherstxt=0x7f0b006a;
@@ -1654,7 +1653,7 @@ containing a value of this type.
         public static final int search_src_text=0x7f0b004b;
         public static final int search_voice_btn=0x7f0b004f;
         public static final int selectmnth=0x7f0b009f;
-        public static final int sep=0x7f0b00c0;
+        public static final int sep=0x7f0b00bf;
         public static final int shortcut=0x7f0b003b;
         public static final int show=0x7f0b0060;
         public static final int showCustom=0x7f0b000f;
@@ -1763,9 +1762,8 @@ containing a value of this type.
         public static final int category=0x7f0c0001;
         public static final int cloud=0x7f0c0002;
         public static final int editdel=0x7f0c0003;
-        public static final int facebook=0x7f0c0004;
-        public static final int main=0x7f0c0005;
-        public static final int month=0x7f0c0006;
+        public static final int main=0x7f0c0004;
+        public static final int month=0x7f0c0005;
     }
     public static final class string {
         public static final int abc_action_bar_home_description=0x7f050000;

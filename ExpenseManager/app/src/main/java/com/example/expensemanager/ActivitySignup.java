@@ -26,6 +26,7 @@ public class ActivitySignup extends ActionBarActivity {
     protected EditText passwordEditText;
     protected EditText emailEditText;
     protected Button signUpButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
@@ -38,10 +39,10 @@ public class ActivitySignup extends ActionBarActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setLogo(R.drawable.expsmall);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
-        usernameEditText = (EditText)findViewById(R.id.usernameField);
-        passwordEditText = (EditText)findViewById(R.id.passwordField);
-        emailEditText = (EditText)findViewById(R.id.emailField);
-        signUpButton = (Button)findViewById(R.id.signupButton);
+        usernameEditText = (EditText) findViewById(R.id.usernameField);
+        passwordEditText = (EditText) findViewById(R.id.passwordField);
+        emailEditText = (EditText) findViewById(R.id.emailField);
+        signUpButton = (Button) findViewById(R.id.signupButton);
         signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,11 +69,6 @@ public class ActivitySignup extends ActionBarActivity {
                     editor.putString("email", email);
                     editor.putInt("loginfb", 0);
                     editor.commit();
-//                        Intent inc = new Intent(getApplicationContext(), Sandwitch.class);
-//                        inc.putExtra("username", username);
-//                        inc.putExtra("password", password);
-//                        startActivity(inc);
-
                     ParseUser newUser = new ParseUser();
                     newUser.setUsername(username);
                     newUser.setPassword(password);
@@ -84,8 +80,7 @@ public class ActivitySignup extends ActionBarActivity {
                             if (e == null) {
                                 Intent intent = new Intent(ActivitySignup.this, ActivityLogin.class);
                                 Toast.makeText(getApplicationContext(), "Signup Successful", Toast.LENGTH_SHORT).show();
-//                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                ActivitySignup.this.finish();
                                 startActivity(intent);
                             } else {
                                 Toast.makeText(getApplicationContext(), "Signup Unsuccessful", Toast.LENGTH_SHORT).show();
@@ -94,11 +89,8 @@ public class ActivitySignup extends ActionBarActivity {
                                         .setTitle(R.string.signup_error_title)
                                         .setPositiveButton(android.R.string.ok, null);
                                 AlertDialog dialog = builder.create();
-//                                if(!((Activity) context).isFinishing())
-//                                {
-                                //show dialog
                                 dialog.show();
-//                                }
+
 
                             }
                         }
@@ -106,5 +98,12 @@ public class ActivitySignup extends ActionBarActivity {
                 }
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent in=new Intent(getApplicationContext(),ActivityLogin.class);
+        startActivity(in);
     }
 }

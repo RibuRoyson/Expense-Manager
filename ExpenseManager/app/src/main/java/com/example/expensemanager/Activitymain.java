@@ -18,6 +18,7 @@ import com.parse.ParseUser;
 public class Activitymain extends ActionBarActivity {
 
     SharedPreferences share;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
@@ -40,7 +41,7 @@ public class Activitymain extends ActionBarActivity {
     }
 
     public void editdatas(View v) {
-        Intent ac = new Intent(getApplicationContext(),Showresult.class);
+        Intent ac = new Intent(getApplicationContext(), Showresult.class);
         startActivity(ac);
     }
 
@@ -50,18 +51,17 @@ public class Activitymain extends ActionBarActivity {
     }
 
 
-    public void showmonth(View v)
-    {
+    public void showmonth(View v) {
         Intent incc = new Intent(getApplicationContext(), Monthwise.class);
         startActivity(incc);
     }
-    public void showcat(View v)
-    {
+
+    public void showcat(View v) {
         Intent inc = new Intent(getApplicationContext(), Bycat.class);
         startActivity(inc);
     }
-    public void graphs(View v)
-    {
+
+    public void graphs(View v) {
         Intent incn = new Intent(getApplicationContext(), GraphMenu.class);
         startActivity(incn);
     }
@@ -74,22 +74,19 @@ public class Activitymain extends ActionBarActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId())
-        {
+        switch (item.getItemId()) {
             case R.id.cloud:
-                Intent inc1=new Intent(getApplication(),CloudListView.class);
+                Intent inc1 = new Intent(getApplication(), CloudListView.class);
                 startActivity(inc1);
                 break;
             case R.id.action_logout:
-                share=getSharedPreferences("UsernamePrefs", MODE_PRIVATE);
-                int s=share.getInt("loginvalue", 0);
-                if (s==0)
-                {
+                share = getSharedPreferences("UsernamePrefs", MODE_PRIVATE);
+                int s = share.getInt("loginvalue", 0);
+                if (s == 0) {
                     ParseUser.logOut();
                     ParseUser newUser = ParseUser.getCurrentUser();
                     loadloginView();
-                }
-                else if (s==1){
+                } else if (s == 1) {
                     LoginManager.getInstance().logOut();
                     ParseUser.logOut();
                     loadloginView();
@@ -100,17 +97,20 @@ public class Activitymain extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
 
-        return super.onPrepareOptionsMenu(menu);
-    }
-
-    public void loadloginView()
-    {
-        Intent intent=new Intent(this,ActivityLogin.class);
+    public void loadloginView() {
+        Intent intent = new Intent(this, ActivityLogin.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
 }

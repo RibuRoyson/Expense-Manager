@@ -22,6 +22,7 @@ public class UserAdaptercat extends ArrayAdapter<details> {
         this.userslist = userlist;
         this.myContext = context;
     }
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         return getCustomView(position, convertView, parent);
@@ -31,6 +32,7 @@ public class UserAdaptercat extends ArrayAdapter<details> {
     public View getDropDownView(int position, View convertView, ViewGroup parent) {
         return getCustomView(position, convertView, parent);
     }
+
     private View getCustomView(final int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
             LayoutInflater mlayoutInflater = LayoutInflater.from(myContext);

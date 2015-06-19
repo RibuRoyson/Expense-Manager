@@ -21,12 +21,12 @@ import java.util.List;
  * Created by imrokraft on 14/4/15.
  */
 public class UserAdapter extends ArrayAdapter<details> {
+     ArrayList<String> notes = new ArrayList<String>();
+     ArrayList<String> object = new ArrayList<String>();
+     ArrayList<String> notes2 = new ArrayList<String>();
     ArrayList<details> userslist;
     Context myContext;
-    final ArrayList<String> notes=new ArrayList<String>();
-    final ArrayList<String> object=new ArrayList<String>();
-    final ArrayList<String> notes2=new ArrayList<String>();
-    String s1,email;
+    String s1, email;
     SharedPreferences share;
 
 
@@ -35,29 +35,28 @@ public class UserAdapter extends ArrayAdapter<details> {
         this.userslist = userlist;
         this.myContext = context;
     }
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         return getCustomView(position, convertView, parent);
     }
+
     @Override
     public View getDropDownView(int position, View convertView, ViewGroup parent) {
         return getCustomView(position, convertView, parent);
     }
+
     private View getCustomView(final int position, View convertView, final ViewGroup parent) {
-        share=myContext.getSharedPreferences("UsernamePrefs",Context.MODE_PRIVATE);
-        email=share.getString("email",null);
+        share = myContext.getSharedPreferences("UsernamePrefs", Context.MODE_PRIVATE);
+        email = share.getString("email", null);
         ParseQuery<ParseObject> query1 = ParseQuery.getQuery("expense");
-        query1.whereEqualTo("Email",email);
+        query1.whereEqualTo("Email", email);
         query1.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> list, ParseException e) {
                 if (e == null) {
                     for (ParseObject post : list) {
-//                        System.out.println(post.getObjectId());
-//                        System.out.println(post.getString("Name"));
-//                        System.out.println(post.getString("Qualification"));
-
-                        notes.add(post.getString("Name"));
+                        notes.add(post.getString("Expense"));
                         object.add(post.getObjectId());
                         System.out.println(object);
                     }
@@ -73,7 +72,7 @@ public class UserAdapter extends ArrayAdapter<details> {
             LayoutInflater mlayoutInflater = LayoutInflater.from(myContext);
             convertView = mlayoutInflater.inflate(R.layout.list_item, parent, false);
         }
-        TextView id=(TextView) convertView.findViewById(R.id.textid1);
+        TextView id = (TextView) convertView.findViewById(R.id.textid1);
         TextView expen = (TextView) convertView.findViewById(R.id.textexp2);
         TextView cat = (TextView) convertView.findViewById(R.id.textcat3);
         TextView desc = (TextView) convertView.findViewById(R.id.textdes4);
@@ -86,40 +85,26 @@ public class UserAdapter extends ArrayAdapter<details> {
         dat.setText(userslist.get(position).getDate1());
         id.setText(userslist.get(position).getId());
 
-//        convertView.setOnLongClickListener(new View.OnLongClickListener() {
-//            @Override
-//            public boolean onLongClick(View v) {
-//                new View.OnCreateContextMenuListener() {
-//                    @Override
-//                    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-//                        onCreateContextMenu(menu, v, menuInfo);
-//                        MenuInflater menuinflater=new MenuInflater(getContext());
-//                        menuinflater.inflate(R.menu.editdel,menu);
-//                    }
-//
-//                };
-//                return false;
-//            }
-//        });
-
-
-
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
 
-                Intent i = new Intent(getContext(),EditData.class);
+                Intent i = new Intent(getContext(), EditData.class);
 
                 i.putExtra("id", userslist.get(position).getId());
                 i.putExtra("expense", userslist.get(position).getExpense());
                 i.putExtra("cat", userslist.get(position).getCat());
                 i.putExtra("description", userslist.get(position).getDescription());
-                i.putExtra("time",userslist.get(position).getTime1());
+                i.putExtra("time", userslist.get(position).getTime1());
                 i.putExtra("date", userslist.get(position).getDate1());
-                String dd =object.get(position).toString();
-                String ss=dd.toString().trim();
-                i.putExtra("objectid",ss);
+                String dd = object.get(position).toString();
+                String ss = dd.toString().trim();
+                if (ss == null) {
+                    System.out.println("null");
+                } else {
+                    i.putExtra("objectid", ss);
+                }
                 i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 myContext.startActivity(i);
 

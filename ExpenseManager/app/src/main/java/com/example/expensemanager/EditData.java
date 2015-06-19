@@ -3,6 +3,7 @@ package com.example.expensemanager;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -13,21 +14,25 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.facebook.login.LoginManager;
 import com.parse.GetCallback;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
 /**
  * Created by imrokraft on 29/4/15.
  */
 public class EditData extends ActionBarActivity {
+    final ParseObject expensemanager = new ParseObject("expense");
     EditText exp, cat, desc, tim, dat;
-    String id,  cat1, desc1, tim1, dat1,exp1;
+    String id, cat1, desc1, tim1, dat1, exp1;
     details d;
     int a, b, c;
     Dbhandler dbh;
-   String obj;
-    final ParseObject expensemanager = new ParseObject("expense");
+    String obj;
+    SharedPreferences share;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,8 +56,8 @@ public class EditData extends ActionBarActivity {
         desc1 = i.getExtras().getString("description");
         tim1 = i.getExtras().getString("time");
         dat1 = i.getExtras().getString("date");
-        obj= getIntent().getExtras().getString("objectid").trim();
-        System.out.println(obj);
+//        obj = getIntent().getExtras().getString("objectid").trim();
+        obj = getIntent().getStringExtra("objectid").trim();
         exp.setText(exp1);
         cat.setText(cat1);
         desc.setText(desc1);
@@ -64,17 +69,17 @@ public class EditData extends ActionBarActivity {
 
     public void updateclick(View v) {
 
-       final String ex=exp.getText().toString();
-        final String c=cat.getText().toString();
-        final String de=desc.getText().toString();
-        final String t=tim.getText().toString();
-        final String da=dat.getText().toString();
+        final String ex = exp.getText().toString();
+        final String c = cat.getText().toString();
+        final String de = desc.getText().toString();
+        final String t = tim.getText().toString();
+        final String da = dat.getText().toString();
         d.setExpense(exp.getText().toString());
         d.setCat(cat.getText().toString());
         d.setDescription(desc.getText().toString());
         d.setTime1(tim.getText().toString());
         d.setDate1(dat.getText().toString());
-        obj= getIntent().getExtras().getString("objectid").trim();
+        obj = getIntent().getExtras().getString("objectid").trim();
         dbh = new Dbhandler(EditData.this);
         dbh.updateDetails(d, id + "");
         exp.setText("");
@@ -87,10 +92,10 @@ public class EditData extends ActionBarActivity {
             @Override
             public void done(ParseObject expensemanager, com.parse.ParseException e) {
                 if (e == null) {
-                    expensemanager.put("Expense",ex);
-                    expensemanager.put("Category",c);
-                    expensemanager.put("Description",de);
-                    expensemanager.put("Time",t);
+                    expensemanager.put("Expense", ex);
+                    expensemanager.put("Category", c);
+                    expensemanager.put("Description", de);
+                    expensemanager.put("Time", t);
                     expensemanager.put("Date", da);
                     expensemanager.saveInBackground();
                 }
@@ -105,13 +110,13 @@ public class EditData extends ActionBarActivity {
         new AlertDialog.Builder(this)
                 .setTitle("Expense Manager")
                 .setMessage("Are you sure?")
-                .setPositiveButton("No",new DialogInterface.OnClickListener() {
+                .setPositiveButton("No", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
                     }
                 })
-                .setNegativeButton("Yes",new DialogInterface.OnClickListener() {
+                .setNegativeButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dbh = new Dbhandler(EditData.this);
@@ -129,7 +134,6 @@ public class EditData extends ActionBarActivity {
                 .show();
 
 
-
     }
 
     public void viewdb(View v) {
@@ -138,14 +142,41 @@ public class EditData extends ActionBarActivity {
         EditData.this.finish();
 
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main,menu);
+        getMenuInflater().inflate(R.menu.main, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.cloud:
+                Intent inc1 = new Intent(getApplication(), CloudListView.class);
+                startActivity(inc1);
+                break;
+            case R.id.action_logout:
+                share = getSharedPreferences("UsernamePrefs", MODE_PRIVATE);
+                int s = share.getInt("loginvalue", 0);
+                if (s == 0) {
+                    ParseUser.logOut();
+                    ParseUser newUser = ParseUser.getCurrentUser();
+                    loadloginView();
+                } else if (s == 1) {
+                    LoginManager.getInstance().logOut();
+                    ParseUser.logOut();
+                    loadloginView();
+                }
+                break;
+        }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void loadloginView() {
+        Intent intent = new Intent(this, ActivityLogin.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
 }

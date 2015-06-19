@@ -12,6 +12,6 @@ public class ExpenseManagerApplication extends Application {
     public void onCreate() {
         super.onCreate();
         Parse.enableLocalDatastore(this);
-        Parse.initialize(this,"HwKXPcDR63aQtYAvChk9nHC3W9pp2DsMl3F9imk8","OpKvw7ex1Z4rCWozoeqcB7NsqNNfcD7Or3OBZopM");
+        Parse.initialize(this,"aZAsmlCrryBGiMFMKm5FCatLqEzGjbRT68ohSVVP","YXouNh45NcGRFk3ZSbEOd7r5fYdEFmJAZSNewN7U");
     }
 }

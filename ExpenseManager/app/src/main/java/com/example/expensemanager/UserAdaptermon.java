@@ -15,6 +15,7 @@ import java.util.ArrayList;
 public class UserAdaptermon extends ArrayAdapter<details> {
     ArrayList<details> userslist;
     Context myContext;
+
     public UserAdaptermon(Context context, ArrayList<details> userlist) {
         super(context, R.layout.list_item1, userlist);
         this.userslist = userlist;
@@ -30,6 +31,7 @@ public class UserAdaptermon extends ArrayAdapter<details> {
     public View getDropDownView(int position, View convertView, ViewGroup parent) {
         return getCustomView(position, convertView, parent);
     }
+
     private View getCustomView(final int position, View convertView, final ViewGroup parent) {
         if (convertView == null) {
             LayoutInflater mlayoutInflater = LayoutInflater.from(myContext);
